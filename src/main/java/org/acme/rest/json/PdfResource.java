@@ -1,9 +1,12 @@
 package org.acme.rest.json;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentInformation;
@@ -16,9 +19,13 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 public class PdfResource {
 
   @GET
+  @Produces(MediaType.APPLICATION_OCTET_STREAM)
   public Response generateReport() throws IOException {
     genPdf();
-    return Response.accepted().build();
+    File temp = new File("/tmp/pdfBoxHelloWorld.pdf");
+    final Response.ResponseBuilder response = Response.ok(temp);
+    response.header("Content-Disposition", "attachment;filename=" + "lol.pdf");
+    return response.build();
   }
 
   void genPdf() throws IOException {
@@ -39,8 +46,7 @@ public class PdfResource {
     contentStream.showText("Hello World");
     contentStream.endText();
     contentStream.close();
-
-    document.save("pdfBoxHelloWorld.pdf");
+    document.save("/tmp/pdfBoxHelloWorld.pdf");
     document.close();
   }
 }
