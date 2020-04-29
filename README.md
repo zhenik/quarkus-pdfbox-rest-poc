@@ -2,6 +2,7 @@
 Approaches for poc:
 * pdfBox (done)
 * [Apache FOP](https://xmlgraphics.apache.org/fop/2.4/embedding.html) 
+* [JasperReports](https://community.jaspersoft.com/project/jasperreports-library/resources)
 ## Links 
 * [Github pdfbox](https://github.com/apache/pdfbox)
 * [Tutorial 1](https://www.tutorialspoint.com/pdfbox/pdfbox_quick_guide.htm)
